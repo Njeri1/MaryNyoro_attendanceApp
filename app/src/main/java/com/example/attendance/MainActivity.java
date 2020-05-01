@@ -1,14 +1,15 @@
 package com.example.attendance;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         attendanceDB = new DatabaseHelper(this);
         etName = (EditText) findViewById(R.id.student_name);
@@ -38,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         ViewData();
         UpdateData();
         DeleteData();
+        etStudent_id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewActivity();
+            }
+        });
+
+    }
+    public void openNewActivity(){
+        Intent intent = new Intent(this, barcodeScanner.class);
+        startActivity(intent);
     }
 
     public void AddData(){
